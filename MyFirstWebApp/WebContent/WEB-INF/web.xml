@@ -9,13 +9,35 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	<filter>
+		<description>
+		</description>
+		<display-name>FilterServlet</display-name>
+		<filter-name>FilterServlet</filter-name>
+		<filter-class>com.naresh.gopal.filters.MyFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FilterServlet</filter-name>
+		<url-pattern>/FilterServlet</url-pattern>
+	</filter-mapping>
 	<servlet>
 	<servlet-name>myServlet</servlet-name>
 	<servlet-class>com.naresh.gopal.MyFirstServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>FilterServlet</display-name>
+		<servlet-name>FilterServlet</servlet-name>
+		<servlet-class>com.naresh.gopal.FilterServlet</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
 	<servlet-name>myServlet</servlet-name>
 	<url-pattern>/getMessage</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FilterServlet</servlet-name>
+		<url-pattern>/FilterServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
