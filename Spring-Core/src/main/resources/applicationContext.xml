@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+   
+   <!-- Dependent -->
+   <bean name="emp" class="com.naresh.gopal.core.Employee">
+   <property name="name" value="Gopal"></property>
+   <property name="empId" value="EMP01"></property>
+   <property name="address" ref="empAddress"></property><!-- setter injection -->
+   </bean> 
+   
+   <!-- Dependency -->
+   <bean id="empAddress" class="com.naresh.gopal.core.Address">
+   <property name="address1" value="KPHB"></property>
+   <property name="city" value="Hyderabad"></property>
+   </bean>
+   
+   <bean id="compAddress" class="com.naresh.gopal.core.Address">
+   <property name="address1" value="HitechCity"></property>
+   <property name="city" value="Hyderabad"></property>
+   </bean>
+   
+   <bean id="company" class="com.naresh.gopal.core.Company">
+   <property name="companyName" value="IBM"></property>
+   <property name="companyAddress" ref="compAddress"></property>
+   <property name="emp" ref="emp"></property>
+   </bean>
+   
+   <bean id="oracle" class="java.sql.DriverManager" factory-method="getConnection">
+   <constructor-arg value="jdbc:mysql://localhost:3306/gopal"></constructor-arg>
+   <constructor-arg value="root"></constructor-arg>
+   <constructor-arg value="root"></constructor-arg>
+   </bean>
+   
+   <bean id="mysql" class="java.sql.DriverManager" factory-method="getConnection">
+   <constructor-arg value="jdbc:mysql://localhost:3306/naresh"></constructor-arg>
+   <constructor-arg value="root"></constructor-arg>
+   <constructor-arg value="root"></constructor-arg>
+   </bean>
+   
+   <bean id="oracleImpl" class="com.naresh.gopal.dao.impl.OracleDAOImpl">
+   <property name="con" ref="oracle"></property>
+   </bean>
+   
+    <bean id="mysqlImpl" class="com.naresh.gopal.dao.impl.MYSQLImpl">
+   <property name="con" ref="mysql"></property>
+   </bean>
+   
+   <bean id="service" class="com.naresh.gopal.service.Service">
+   <property name="dao" ref="oracleImpl"></property>
+   </bean>
+   
+   </beans>
